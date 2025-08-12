@@ -9,6 +9,12 @@ const fetch = require('node-fetch');
 const app = express();
 app.use(express.json()); // 启用JSON请求体解析
 
+// --- 新增的欢迎页面路由 ---
+app.get('/', (req, res) => {
+  res.status(200).send('<h1>后端服务正在正常运行！</h1><p>请在您的飞书插件中进行操作。</p>');
+});
+// --- 新增结束 ---
+
 // 从环境变量中安全地获取所有凭证，绝不硬编码
 const FEISHU_APP_TOKEN = process.env.FEISHU_APP_TOKEN;
 const FEISHU_PERSONAL_BASE_TOKEN = process.env.FEISHU_PERSONAL_BASE_TOKEN;
