@@ -1,14 +1,12 @@
 {
   "name": "video-analysis-backend",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "description": "API service for video analysis plugin",
   "main": "api/index.js",
   "scripts": {
     "start": "node api/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@google/generative-ai": "^0.14.1",
     "@lark-base-open/node-sdk": "^0.3.6",
