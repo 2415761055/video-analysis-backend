@@ -1,4 +1,4 @@
-// api/index.js (最终语法修正版)
+// api/index.js (Vercel 标准 Express 模式 - 完整版)
 
 const express = require('express');
 const { BaseClient } = require('@lark-base-open/node-sdk');
@@ -10,10 +10,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-app.get('/', (req, res) => {
-    res.status(200).send('<h1>后端服务正在正常运行！CORS 已启用。</h1>');
-});
 
 const GEMINI_MODEL_IDENTIFIER = process.env.GEMINI_MODEL_IDENTIFIER || "gemini-1.5-pro-latest";
 const FEISHU_APP_TOKEN = process.env.FEISHU_APP_TOKEN;
@@ -32,6 +28,10 @@ async function fileToGenerativePart(url) {
     const buffer = await response.buffer();
     return { inlineData: { data: buffer.toString("base64"), mimeType: response.headers.get('content-type') || 'video/mp4' } };
 }
+
+app.get('/', (req, res) => {
+    res.status(200).send('<h1>后端服务正在正常运行！(Express on Vercel)</h1>');
+});
 
 app.post('/api/analyze', async (req, res) => {
     const { record_id } = req.body;
@@ -94,9 +94,8 @@ app.post('/api/analyze', async (req, res) => {
     } catch (error) {
         console.error('分析失败:', error);
         await feishuClient.base.appTableRecord.update({ path: { table_id: TABLE_ID_TASKS, record_id: record_id }, data: { fields: { '分析状态': '失败' } } }).catch(updateErr => console.error("更新失败状态时出错:", updateErr));
-        // 使用修正后的 JavaScript 语法
         res.status(500).json({ error: error instanceof Error ? error.message : String(error) });
     }
 });
 
-module.exports = app;``
+module.exports = app;
