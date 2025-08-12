@@ -2,18 +2,18 @@
   "name": "video-analysis-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node api/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@google/generative-ai": "^0.24.1",
-    "@lark-base-open/node-sdk": "^1.0.1",
+    "@google/generative-ai": "^0.14.1",
+    "@lark-base-open/node-sdk": "^0.3.6",
     "cors": "^2.8.5",
-    "express": "^5.1.0",
+    "express": "^4.19.2",
     "node-fetch": "^2.7.0"
   }
 }
